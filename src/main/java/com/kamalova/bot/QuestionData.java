@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Data {
+public class QuestionData {
 
     public static List<Question> init() {
         List<Question> questions = new ArrayList<>();
@@ -23,12 +23,19 @@ public class Data {
                 .build()) {
             String[] values;
             while ((values = csvReader.readNext()) != null) {
-                String questionBody = values[0];
-                List<String> answers = List.of(values[1], values[2], values[3]);
-                String correctAnswer = values[4];
-                Question question = new Question(questionBody, answers, correctAnswer);
-                questions.add(question);
-            }
+                try {
+                    int number = Integer.valueOf(values[0]);
+                    String questionBody = values[1];
+                    List<String> answers = List.of(values[2], values[3], values[4]);
+                    String correctAnswer = values[5];
+                    Question question = new Question(number, questionBody, answers, correctAnswer);
+                    questions.add(question);
+                } catch (Exception e) {
+                    System.out.println(values);
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+             }
         } catch (IOException e) {
             e.printStackTrace();
         }
