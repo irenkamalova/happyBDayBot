@@ -25,7 +25,10 @@ public class App {
             generalProperties.load(generalIn);
             String botName = generalProperties.getProperty("bot.name");
 
-            List<Question> questions = QuestionData.init();
+            InputStream data = App.class.getClassLoader()
+                    .getResourceAsStream("q.csv");
+
+            List<Question> questions = QuestionData.init(data);
             questions.forEach(System.out::println);
 
             ApiContextInitializer.init();

@@ -9,6 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,7 +83,7 @@ public class QuestionsBot extends TelegramLongPollingBot {
                 .map(answer -> new InlineKeyboardButton(answer))
                 .map(a -> a.setCallbackData(a.getText()))
                 .collect(Collectors.toList());
-        List<List<InlineKeyboardButton>> keyboardButtons = List.of(buttons);
+        List<List<InlineKeyboardButton>> keyboardButtons = Collections.singletonList(buttons);
         inlineKeyboardMarkup.setKeyboard(keyboardButtons);
         return inlineKeyboardMarkup;
     }
@@ -90,8 +92,8 @@ public class QuestionsBot extends TelegramLongPollingBot {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
         inlineKeyboardButton.setText("Готов!");
-        List<InlineKeyboardButton> keyboardButtonsRow = List.of(inlineKeyboardButton);
-        inlineKeyboardMarkup.setKeyboard(List.of(keyboardButtonsRow));
+        List<InlineKeyboardButton> keyboardButtonsRow = Collections.singletonList(inlineKeyboardButton);
+        inlineKeyboardMarkup.setKeyboard(Collections.singletonList(keyboardButtonsRow));
         return inlineKeyboardMarkup;
     }
 
